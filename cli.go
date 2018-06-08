@@ -105,13 +105,11 @@ func (cli *CLI) Run(args []string) int {
 	//Creating Caching
 	var cachingClient caching.Caching
 	if caching.IsNeeded(*wantedEvents) {
-		config := &caching.CachingBoltConfig{
-			Path:               *boltDatabasePath,
+		config := &caching.CachingMemoryConfig{
 			IgnoreMissingApps:  *ignoreMissingApps,
 			CacheInvalidateTTL: *tickerTime,
-			RequestBySec:       *requestLimit,
 		}
-		cachingClient, err = caching.NewCachingBolt(cfClient, config)
+		cachingClient, err = caching.NewCachingMemory(cfClient, config)
 
 		if err != nil {
 			logging.LogError("Failed to create boltdb cache", err)
