@@ -14,8 +14,8 @@ func (c *CachingEmpty) Close() error {
 	return nil
 }
 
-func (c *CachingEmpty) GetAllApps() (map[string]*App, error) {
-	return nil, nil
+func (c *CachingEmpty) FillCache() error {
+	return nil
 }
 
 func (c *CachingEmpty) GetApp(appGuid string) (*App, error) {

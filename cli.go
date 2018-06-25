@@ -129,6 +129,15 @@ func (cli *CLI) Run(args []string) int {
 	}
 	defer cachingClient.Close()
 
+	// Bootstrap cache
+	logging.LogStd("Pre-filling cache...", true)
+	err = cachingClient.FillCache()
+	if err != nil {
+		logging.LogError("Error pre-filling cache: ", err)
+		return ExitCodeError
+	}
+	logging.LogStd("Cache filled.", true)
+
 	//Adding Stats
 	statistic := stats.NewStats()
 	go statistic.PerSec()

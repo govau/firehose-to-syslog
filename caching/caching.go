@@ -19,6 +19,7 @@ type App struct {
 type Caching interface {
 	Open() error
 	Close() error
+	FillCache() error
 	GetApp(string) (*App, error)
 }
 
